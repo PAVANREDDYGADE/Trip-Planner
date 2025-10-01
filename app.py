@@ -29,9 +29,9 @@ if submitted:
     if not ok:
         st.error(msg)
     else:
-        st.info("Generating itinerary, please wait...")
-        client = AIClient()
-        prompt = build_prompt(normalized)
-        result = client.generate_itinerary(prompt)
+        with st.spinner("Generating itinerary, please wait..."):
+            client = AIClient()
+            prompt = build_prompt(normalized)
+            result = client.generate_itinerary(prompt)
         st.markdown("### Itinerary")
         st.text(result)
