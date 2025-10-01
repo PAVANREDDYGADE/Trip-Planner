@@ -34,22 +34,18 @@ def build_prompt(params):
     transport = params["transport"]
     stay = params["stay_type"]
     currency = params["currency"]
-    start_date = params["start_date"] or "an upcoming weekend"
 
     prompt = f"""
-You are a student-focused travel planner. Create a budget-friendly {duration}-day itinerary for {destination}.
+Create a {duration}-day budget-friendly itinerary for {destination}.
 
-Consider:
-- Budget level: {budget}.
-- Interests: {interests}.
-- Preferred transport: {transport}.
-- Preferred stay: {stay}.
-- Currency: {currency}.
+Preferences:
+- Budget: {budget}
+- Interests: {interests}
+- Transport: {transport}
+- Stay: {stay}
+- Currency: {currency}
 
-Prioritize free/low-cost highlights, student discounts, and safety.
-
-Output format:
-1) JSON fenced block with daily plan, meals, transport, accommodation, estimated costs, and tips.
-2) Below JSON, a concise student-friendly summary (5-7 sentences).
+Return the plan as JSON with daily activities, costs, and tips.
 """
     return prompt
+
