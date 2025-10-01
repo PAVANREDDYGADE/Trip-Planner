@@ -30,8 +30,10 @@ if submitted:
         st.error(msg)
     else:
         with st.spinner("Generating itinerary, please wait..."):
+            st.write("Sending prompt to AI...")
             client = AIClient()
             prompt = build_prompt(normalized)
             result = client.generate_itinerary(prompt)
+            st.write("Received response from AI.")
         st.markdown("### Itinerary")
         st.text(result)
