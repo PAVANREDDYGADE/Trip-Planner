@@ -2,9 +2,18 @@ import streamlit as st
 from ai_client import AIClient
 from planner import validate_inputs, build_prompt
 
-st.set_page_config(page_title="Student AI Travel Planner", layout="wide")
+# Step 1: Set page title and favicon icon.
+# Place your favicon.ico file in the app folder.
+st.set_page_config(
+    page_title="Student AI Travel Planner",
+    page_icon="favicon.ico",
+    layout="wide"
+)
+
+# Main app title
 st.title("🎒 Student AI Travel Planner")
 
+# Input form for trip details
 with st.form("planner_form"):
     destination = st.text_input("Destination", placeholder="e.g., Ooty, Goa, Jaipur")
     start_date = st.date_input("Start date (optional)", value=None)
@@ -15,6 +24,7 @@ with st.form("planner_form"):
     interests = st.text_input("Interests (comma-separated)", placeholder="nature, food, culture, hiking")
     submitted = st.form_submit_button("Generate Itinerary")
 
+# Handle submission
 if submitted:
     ok, msg, normalized = validate_inputs({
         "destination": destination,
@@ -37,3 +47,12 @@ if submitted:
             st.write("Received response from AI.")
         st.markdown("### Itinerary")
         st.text(result)
+
+# Step 2: Inform users about sharing app URL
+st.markdown("""
+---
+### Share this app
+Send this link to your friends so they can use the trip planner:
+
+`https://your-app-name.streamlit.app`
+""")
