@@ -36,8 +36,9 @@ def build_prompt(params):
     currency = params["currency"]
 
     prompt = f"""
-Create a {duration}-day budget-friendly itinerary for {destination}.
+You are a travel itinerary designer.
 
+Create a {duration}-day budget-friendly travel itinerary for {destination}.
 Preferences:
 - Budget: {budget}
 - Interests: {interests}
@@ -45,7 +46,18 @@ Preferences:
 - Stay: {stay}
 - Currency: {currency}
 
-Return the plan as JSON with daily activities, costs, and tips.
+Format for each day:
+Day X:
+9:00 AM - 10:00 AM: Breakfast at [cafe name] (Menu: [sample item], Cost: [cost in {currency}])
+10:00 AM - 12:00 PM: [Activity] at [place] (Cost: [cost])
+12:00 PM - 1:00 PM: Lunch at [place] (Menu: [item], Cost: [cost])
+1:00 PM - 4:00 PM: [Activity] at [place] (Cost: [cost])
+... (one per line, no extra blank lines!)
+
+End each day with: Total estimated daily cost: [amount] {currency}
+
+Do NOT use bullet points, lists, tables, or code blocks.
+One line for each time slot/activity, serial schedule format—NO extra lines.
+Respond ONLY with the schedule in this style.
 """
     return prompt
-
